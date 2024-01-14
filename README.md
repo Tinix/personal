@@ -1,4 +1,4 @@
-# Personal website Daniel Tinivella software Enginner
+# Personal website Daniel Tinivella Software Enginner
 
 To start your Phoenix server:
 
