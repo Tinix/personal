@@ -17,7 +17,8 @@ defmodule PersonalWeb.Router do
   scope "/", PersonalWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    # get "/", PageController, :home
+    get "/", MainController, :index
   end
 
   # Other scopes may use custom stacks.
