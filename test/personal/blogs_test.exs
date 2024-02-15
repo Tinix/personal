@@ -8,7 +8,14 @@ defmodule Personal.BlogsTest do
 
     import Personal.BlogsFixtures
 
-    @invalid_attrs %{author: nil, title: nil, dev: nil, content: nil, published_at: nil, tags: nil}
+    @invalid_attrs %{
+      author: nil,
+      title: nil,
+      dev: nil,
+      content: nil,
+      published_at: nil,
+      tags: nil
+    }
 
     test "list_blog/0 returns all blog" do
       blog = blog_fixture()
@@ -21,7 +28,14 @@ defmodule Personal.BlogsTest do
     end
 
     test "create_blog/1 with valid data creates a blog" do
-      valid_attrs = %{author: "some author", title: "some title", dev: "some dev", content: "some content", published_at: ~U[2024-02-14 03:26:00Z], tags: "some tags"}
+      valid_attrs = %{
+        author: "some author",
+        title: "some title",
+        dev: "some dev",
+        content: "some content",
+        published_at: ~U[2024-02-14 03:26:00Z],
+        tags: "some tags"
+      }
 
       assert {:ok, %Blog{} = blog} = Blogs.create_blog(valid_attrs)
       assert blog.author == "some author"
@@ -38,7 +52,15 @@ defmodule Personal.BlogsTest do
 
     test "update_blog/2 with valid data updates the blog" do
       blog = blog_fixture()
-      update_attrs = %{author: "some updated author", title: "some updated title", dev: "some updated dev", content: "some updated content", published_at: ~U[2024-02-15 03:26:00Z], tags: "some updated tags"}
+
+      update_attrs = %{
+        author: "some updated author",
+        title: "some updated title",
+        dev: "some updated dev",
+        content: "some updated content",
+        published_at: ~U[2024-02-15 03:26:00Z],
+        tags: "some updated tags"
+      }
 
       assert {:ok, %Blog{} = blog} = Blogs.update_blog(blog, update_attrs)
       assert blog.author == "some updated author"

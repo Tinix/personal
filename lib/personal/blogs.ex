@@ -74,7 +74,7 @@ defmodule Personal.Blogs do
   end
 
   @doc """
-  Deletes a blog.
+  Deletes a Blog
 
   ## Examples
 
@@ -85,6 +85,7 @@ defmodule Personal.Blogs do
       {:error, %Ecto.Changeset{}}
 
   """
+
   def delete_blog(%Blog{} = blog) do
     Repo.delete(blog)
   end
