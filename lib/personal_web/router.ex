@@ -17,14 +17,15 @@ defmodule PersonalWeb.Router do
   scope "/", PersonalWeb do
     pipe_through :browser
 
-    # get "/", PageController, :home
     get "/", MainController, :index
-  end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", PersonalWeb do
-  #   pipe_through :api
-  # end
+    live "/blog", BlogLive.Index, :index
+    live "/blog/new", BlogLive.Index, :new
+    live "/blog/:id/edit", BlogLive.Index, :edit
+
+    live "/blog/:id", BlogLive.Show, :show
+    live "/blog/:id/show/edit", BlogLive.Show, :edit
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:personal, :dev_routes) do

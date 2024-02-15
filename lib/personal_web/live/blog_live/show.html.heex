@@ -1,0 +1,31 @@
+<.header>
+  Blog <%= @blog.id %>
+  <:subtitle>This is a blog record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/blog/#{@blog}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit blog</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Title"><%= @blog.title %></:item>
+  <:item title="Content"><%= @blog.content %></:item>
+  <:item title="Author"><%= @blog.author %></:item>
+  <:item title="Dev"><%= @blog.dev %></:item>
+  <:item title="Published at"><%= @blog.published_at %></:item>
+  <:item title="Tags"><%= @blog.tags %></:item>
+</.list>
+
+<.back navigate={~p"/blog"}>Back to blog</.back>
+
+<.modal :if={@live_action == :edit} id="blog-modal" show on_cancel={JS.patch(~p"/blog/#{@blog}")}>
+  <.live_component
+    module={PersonalWeb.BlogLive.FormComponent}
+    id={@blog.id}
+    title={@page_title}
+    action={@live_action}
+    blog={@blog}
+    patch={~p"/blog/#{@blog}"}
+  />
+</.modal>
