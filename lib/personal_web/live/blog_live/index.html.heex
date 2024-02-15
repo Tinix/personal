@@ -1,46 +1,68 @@
-<.header>
-  Listing Blog
-  <:actions>
-    <.link patch={~p"/blog/new"}>
-      <.button>New Blog</.button>
-    </.link>
-  </:actions>
-</.header>
-
-<.table
-  id="blog"
-  rows={@streams.blog_collection}
-  row_click={fn {_id, blog} -> JS.navigate(~p"/blog/#{blog}") end}
->
-  <:col :let={{_id, blog}} label="Title"><%= blog.title %></:col>
-  <:col :let={{_id, blog}} label="Content"><%= blog.content %></:col>
-  <:col :let={{_id, blog}} label="Author"><%= blog.author %></:col>
-  <:col :let={{_id, blog}} label="Dev"><%= blog.dev %></:col>
-  <:col :let={{_id, blog}} label="Published at"><%= blog.published_at %></:col>
-  <:col :let={{_id, blog}} label="Tags"><%= blog.tags %></:col>
-  <:action :let={{_id, blog}}>
-    <div class="sr-only">
-      <.link navigate={~p"/blog/#{blog}"}>Show</.link>
+<nav class="nav py-4">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between">
+            <div class="flex items-center">
+                <span class="text-white text-lg font-semibold">Tinix's different point of view.</span>
+            </div>
+            <div class="flex items-center">
+                <a href="#" class="text-white mr-4">Blog</a>
+                <a href="#" class="text-white mr-4">About</a>
+                <a href="#" class="text-white">Contact</a>
+            </div>
+        </div>
     </div>
-    <.link patch={~p"/blog/#{blog}/edit"}>Edit</.link>
-  </:action>
-  <:action :let={{id, blog}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: blog.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
-    >
-      Delete
-    </.link>
-  </:action>
-</.table>
+</nav>
+<br />
+<div class="container mx-auto p-4 max-w-md">
+  <.header>
+    <:actions>
+      <.link patch={~p"/blog/new"}>
+        <.button>New Blog</.button>
+      </.link>
+    </:actions>
+  </.header>
 
-<.modal :if={@live_action in [:new, :edit]} id="blog-modal" show on_cancel={JS.patch(~p"/blog")}>
-  <.live_component
-    module={PersonalWeb.BlogLive.FormComponent}
-    id={@blog.id || :new}
-    title={@page_title}
-    action={@live_action}
-    blog={@blog}
-    patch={~p"/blog"}
-  />
-</.modal>
+  <.table
+    id="blog"
+    rows={@streams.blog_collection}
+    row_click={fn {_id, blog} -> JS.navigate(~p"/blog/#{blog}") end}
+    >
+    <:col :let={{_id, blog}} label="Title"><%= blog.title %></:col>
+    <:col :let={{_id, blog}} label="Content"><%= blog.content %></:col>
+    <:col :let={{_id, blog}} label="Author"><%= blog.author %></:col>
+    <:col :let={{_id, blog}} label="Dev"><%= blog.dev %></:col>
+    <:col :let={{_id, blog}} label="Published at"><%= blog.published_at %></:col>
+    <:col :let={{_id, blog}} label="Tags"><%= blog.tags %></:col>
+    <:action :let={{_id, blog}}>
+      <div class="sr-only">
+        <.link navigate={~p"/blog/#{blog}"}>Show</.link>
+      </div>
+      <.link patch={~p"/blog/#{blog}/edit"}>Edit</.link>
+    </:action>
+    <:action :let={{id, blog}}>
+      <.link
+        phx-click={JS.push("delete", value: %{id: blog.id}) |> hide("##{id}")}
+        data-confirm="Are you sure?"
+        >
+        Delete
+      </.link>
+    </:action>
+  </.table>
+
+  <.modal :if={@live_action in [:new, :edit]} id="blog-modal" show on_cancel={JS.patch(~p"/blog")}>
+    <.live_component
+      module={PersonalWeb.BlogLive.FormComponent}
+      id={@blog.id || :new}
+      title={@page_title}
+      action={@live_action}
+      blog={@blog}
+      patch={~p"/blog"}
+    />
+  </.modal>
+</div>
+
+<style>
+.nav {
+  background: #4e4848;
+  }
+</style>
