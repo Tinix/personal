@@ -3,61 +3,89 @@ defmodule Personal.BlogsTest do
 
   alias Personal.Blogs
 
-  describe "post" do
-    alias Personal.Blogs.Post
+  describe "blog" do
+    alias Personal.Blogs.Blog
 
     import Personal.BlogsFixtures
 
-    @invalid_attrs %{title: nil, image: nil, content: nil}
+    @invalid_attrs %{
+      author: nil,
+      title: nil,
+      dev: nil,
+      content: nil,
+      published_at: nil,
+      tags: nil
+    }
 
-    test "list_post/0 returns all post" do
-      post = post_fixture()
-      assert Blogs.list_post() == [post]
+    test "list_blog/0 returns all blog" do
+      blog = blog_fixture()
+      assert Blogs.list_blog() == [blog]
     end
 
-    test "get_post!/1 returns the post with given id" do
-      post = post_fixture()
-      assert Blogs.get_post!(post.id) == post
+    test "get_blog!/1 returns the blog with given id" do
+      blog = blog_fixture()
+      assert Blogs.get_blog!(blog.id) == blog
     end
 
-    test "create_post/1 with valid data creates a post" do
-      valid_attrs = %{title: "some title", image: "some image", content: "some content"}
+    test "create_blog/1 with valid data creates a blog" do
+      valid_attrs = %{
+        author: "some author",
+        title: "some title",
+        dev: "some dev",
+        content: "some content",
+        published_at: ~U[2024-02-14 03:26:00Z],
+        tags: "some tags"
+      }
 
-      assert {:ok, %Post{} = post} = Blogs.create_post(valid_attrs)
-      assert post.title == "some title"
-      assert post.image == "some image"
-      assert post.content == "some content"
+      assert {:ok, %Blog{} = blog} = Blogs.create_blog(valid_attrs)
+      assert blog.author == "some author"
+      assert blog.title == "some title"
+      assert blog.dev == "some dev"
+      assert blog.content == "some content"
+      assert blog.published_at == ~U[2024-02-14 03:26:00Z]
+      assert blog.tags == "some tags"
     end
 
-    test "create_post/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Blogs.create_post(@invalid_attrs)
+    test "create_blog/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Blogs.create_blog(@invalid_attrs)
     end
 
-    test "update_post/2 with valid data updates the post" do
-      post = post_fixture()
-      update_attrs = %{title: "some updated title", image: "some updated image", content: "some updated content"}
+    test "update_blog/2 with valid data updates the blog" do
+      blog = blog_fixture()
 
-      assert {:ok, %Post{} = post} = Blogs.update_post(post, update_attrs)
-      assert post.title == "some updated title"
-      assert post.image == "some updated image"
-      assert post.content == "some updated content"
+      update_attrs = %{
+        author: "some updated author",
+        title: "some updated title",
+        dev: "some updated dev",
+        content: "some updated content",
+        published_at: ~U[2024-02-15 03:26:00Z],
+        tags: "some updated tags"
+      }
+
+      assert {:ok, %Blog{} = blog} = Blogs.update_blog(blog, update_attrs)
+      assert blog.author == "some updated author"
+      assert blog.title == "some updated title"
+      assert blog.dev == "some updated dev"
+      assert blog.content == "some updated content"
+      assert blog.published_at == ~U[2024-02-15 03:26:00Z]
+      assert blog.tags == "some updated tags"
     end
 
-    test "update_post/2 with invalid data returns error changeset" do
-      post = post_fixture()
-      assert {:error, %Ecto.Changeset{}} = Blogs.update_post(post, @invalid_attrs)
-      assert post == Blogs.get_post!(post.id)
+    test "update_blog/2 with invalid data returns error changeset" do
+      blog = blog_fixture()
+      assert {:error, %Ecto.Changeset{}} = Blogs.update_blog(blog, @invalid_attrs)
+      assert blog == Blogs.get_blog!(blog.id)
     end
 
-    test "delete_post/1 deletes the post" do
-      post = post_fixture()
-      assert {:ok, %Post{}} = Blogs.delete_post(post)
-      assert_raise Ecto.NoResultsError, fn -> Blogs.get_post!(post.id) end
+    test "delete_blog/1 deletes the blog" do
+      blog = blog_fixture()
+      assert {:ok, %Blog{}} = Blogs.delete_blog(blog)
+      assert_raise Ecto.NoResultsError, fn -> Blogs.get_blog!(blog.id) end
     end
 
-    test "change_post/1 returns a post changeset" do
-      post = post_fixture()
-      assert %Ecto.Changeset{} = Blogs.change_post(post)
+    test "change_blog/1 returns a blog changeset" do
+      blog = blog_fixture()
+      assert %Ecto.Changeset{} = Blogs.change_blog(blog)
     end
   end
 end

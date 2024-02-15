@@ -5,18 +5,21 @@ defmodule Personal.BlogsFixtures do
   """
 
   @doc """
-  Generate a post.
+  Generate a blog.
   """
-  def post_fixture(attrs \\ %{}) do
-    {:ok, post} =
+  def blog_fixture(attrs \\ %{}) do
+    {:ok, blog} =
       attrs
       |> Enum.into(%{
+        author: "some author",
         content: "some content",
-        image: "some image",
+        dev: "some dev",
+        published_at: ~U[2024-02-14 03:26:00Z],
+        tags: "some tags",
         title: "some title"
       })
-      |> Personal.Blogs.create_post()
+      |> Personal.Blogs.create_blog()
 
-    post
+    blog
   end
 end

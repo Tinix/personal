@@ -6,99 +6,100 @@ defmodule Personal.Blogs do
   import Ecto.Query, warn: false
   alias Personal.Repo
 
-  alias Personal.Blogs.Post
+  alias Personal.Blogs.Blog
 
   @doc """
-  Returns the list of post.
+  Returns the list of blog.
 
   ## Examples
 
-      iex> list_post()
-      [%Post{}, ...]
+      iex> list_blog()
+      [%Blog{}, ...]
 
   """
-  def list_post do
-    Repo.all(Post)
+  def list_blog do
+    Repo.all(Blog)
   end
 
   @doc """
-  Gets a single post.
+  Gets a single blog.
 
-  Raises `Ecto.NoResultsError` if the Post does not exist.
+  Raises `Ecto.NoResultsError` if the Blog does not exist.
 
   ## Examples
 
-      iex> get_post!(123)
-      %Post{}
+      iex> get_blog!(123)
+      %Blog{}
 
-      iex> get_post!(456)
+      iex> get_blog!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_blog!(id), do: Repo.get!(Blog, id)
 
   @doc """
-  Creates a post.
+  Creates a blog.
 
   ## Examples
 
-      iex> create_post(%{field: value})
-      {:ok, %Post{}}
+      iex> create_blog(%{field: value})
+      {:ok, %Blog{}}
 
-      iex> create_post(%{field: bad_value})
+      iex> create_blog(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_post(attrs \\ %{}) do
-    %Post{}
-    |> Post.changeset(attrs)
+  def create_blog(attrs \\ %{}) do
+    %Blog{}
+    |> Blog.changeset(attrs)
     |> Repo.insert()
   end
 
   @doc """
-  Updates a post.
+  Updates a blog.
 
   ## Examples
 
-      iex> update_post(post, %{field: new_value})
-      {:ok, %Post{}}
+      iex> update_blog(blog, %{field: new_value})
+      {:ok, %Blog{}}
 
-      iex> update_post(post, %{field: bad_value})
+      iex> update_blog(blog, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_post(%Post{} = post, attrs) do
-    post
-    |> Post.changeset(attrs)
+  def update_blog(%Blog{} = blog, attrs) do
+    blog
+    |> Blog.changeset(attrs)
     |> Repo.update()
   end
 
   @doc """
-  Deletes a post.
+  Deletes a Blog
 
   ## Examples
 
-      iex> delete_post(post)
-      {:ok, %Post{}}
+      iex> delete_blog(blog)
+      {:ok, %Blog{}}
 
-      iex> delete_post(post)
+      iex> delete_blog(blog)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_post(%Post{} = post) do
-    Repo.delete(post)
+
+  def delete_blog(%Blog{} = blog) do
+    Repo.delete(blog)
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking post changes.
+  Returns an `%Ecto.Changeset{}` for tracking blog changes.
 
   ## Examples
 
-      iex> change_post(post)
-      %Ecto.Changeset{data: %Post{}}
+      iex> change_blog(blog)
+      %Ecto.Changeset{data: %Blog{}}
 
   """
-  def change_post(%Post{} = post, attrs \\ %{}) do
-    Post.changeset(post, attrs)
+  def change_blog(%Blog{} = blog, attrs \\ %{}) do
+    Blog.changeset(blog, attrs)
   end
 end
